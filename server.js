@@ -33,10 +33,18 @@ return response.send(quote)
 app.put("/quotes/:id", function(request, response){
   const id= request.params.id;
   const quote = quotes.find(quote => quote.id == id);
-  quote.author=request.body.author;
-  quote.quote=request.body.quote;
+  quote.author = request.body.author;
+  quote.quote = request.body.quote;
   
   return response.send(quote)
+
+});
+
+app.delete("/quotes/:id", function(request, response){
+  const id = request.params.id;
+  const index = quotes.findIndex(quote => quote.id == id);
+  quotes.splice(index,1);
+  return response.send({id: id})
 
 });
 
